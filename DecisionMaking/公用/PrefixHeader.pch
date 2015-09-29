@@ -1,0 +1,16 @@
+//
+//  PrefixHeader.pch
+//  DecisionMaking
+//
+//  Created by rimi on 15/9/28.
+//  Copyright © 2015年 HugheX. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#define kBlueColor [UIColor colorWithRed:0.161 green:0.647 blue:0.733 alpha:1.000]
+#define kTintColor [UIColor whiteColor]
+#define kBlueColorless [UIColor colorWithRed:0.408 green:0.835 blue:0.882 alpha:1.000]
+
+#endif /* PrefixHeader_pch */
