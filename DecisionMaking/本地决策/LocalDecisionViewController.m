@@ -8,6 +8,7 @@
 
 #import "LocalDecisionViewController.h"
 #import "DOPNavbarMenu.h"
+#import "CMSCoinView.h"
 
 
 @interface LocalDecisionViewController ()<UITextViewDelegate,DOPNavbarMenuDelegate>
@@ -32,11 +33,28 @@
     self.numberOfItemsInRow = 3;
     self.view.backgroundColor = kTintColor;
     self.navigationController.navigationBar.tintColor = kTintColor;
-    UIBarButtonItem *shareItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"iconfont-exitup-32x32"] style:UIBarButtonItemStylePlain target:self action:nil];
+    UIBarButtonItem *shareItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"iconfont-exitup-32x32"] style:UIBarButtonItemStylePlain target:self action:@selector(respondsToShareItem)];
     self.navigationItem.rightBarButtonItem = shareItem;
     
     UIBarButtonItem *menuItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"iconfont-list-32x32"] style:UIBarButtonItemStylePlain target:self action:@selector(respondsToMenuItem)];
     self.navigationItem.leftBarButtonItem = menuItem;
+    [self loadImageViews];
+}
+
+
+#pragma mark - Responds methods
+-(void)respondsToShareItem{
+    UIAlertController *shareController = [UIAlertController alertControllerWithTitle:@"分享" message:@"分享到" preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *weChatAction        = [UIAlertAction actionWithTitle:@"微信" style:UIAlertActionStyleDefault handler:nil];
+    UIAlertAction *weiboAction         = [UIAlertAction actionWithTitle:@"微博" style:UIAlertActionStyleDefault handler:nil];
+    UIAlertAction *qqAction            = [UIAlertAction actionWithTitle:@"QQ" style:UIAlertActionStyleDefault handler:nil];
+    UIAlertAction *cancelAction        = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    
+    [shareController addAction:weChatAction];
+    [shareController addAction:weiboAction];
+    [shareController addAction:qqAction];
+    [shareController addAction:cancelAction];
+    [self presentViewController:shareController animated:YES completion:nil];
 }
 
 - (void)respondsToMenuItem{
@@ -61,14 +79,24 @@
     
 }
 
-
+- (void)loadImageViews{
+    UIImageView *pView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 200, 200)];
+    pView.image = [UIImage imageNamed:@"1dollar_01"];
+    UIImageView *sView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 200, 200)];
+    sView.image = [UIImage imageNamed:@"1dollar_02"];
+    CMSCoinView *coinView = [[CMSCoinView alloc] initWithPrimaryView:pView andSecondaryView:sView inFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds)-30, CGRectGetWidth(self.view.bounds)-30)];
+    [coinView setSpinTime:0.1];
+    coinView.center = self.view.center;
+    [self.view addSubview:coinView];
+}
 
 #pragma mark - Getter methods
 - (DOPNavbarMenu *)menu {
     if (_menu == nil) {
         DOPNavbarMenuItem *coinItem = [DOPNavbarMenuItem ItemWithTitle:@"抛硬币" icon:[UIImage imageNamed:@"iconfont-coinyen"]];
         DOPNavbarMenuItem *diceItem = [DOPNavbarMenuItem ItemWithTitle:@"掷骰子" icon:[UIImage imageNamed:@"iconfont-dice"]];
-        _menu = [[DOPNavbarMenu alloc] initWithItems:@[coinItem,diceItem] width:self.view.dop_width maximumNumberInRow:_numberOfItemsInRow];
+        DOPNavbarMenuItem *drawingItem = [DOPNavbarMenuItem ItemWithTitle:@"抓阄" icon:[UIImage imageNamed:@"iconfont-drawer"]];
+        _menu = [[DOPNavbarMenu alloc] initWithItems:@[coinItem,diceItem,drawingItem] width:self.view.dop_width maximumNumberInRow:_numberOfItemsInRow];
         _menu.backgroundColor = kBlueColorless;
         _menu.separatarColor = kTintColor;
         _menu.delegate = self;

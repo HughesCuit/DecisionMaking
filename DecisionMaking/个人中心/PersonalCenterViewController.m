@@ -8,7 +8,18 @@
 
 #import "PersonalCenterViewController.h"
 
-@interface PersonalCenterViewController ()
+
+static NSString *const kUITableViewCellIdentifier = @"cellIdentifier";
+@interface PersonalCenterViewController ()<UITableViewDelegate,UITableViewDataSource>{
+    NSMutableArray<NSArray *> *_dataSource;
+}
+
+@property (nonatomic,strong) UITableView *tableView;/**< 表格视图 */
+
+- (void) initializeDataSource;/**< 初始化数据源 */
+
+
+- (void)initializeUserInterface;/**< 初始化用户界面 */
 
 @end
 
@@ -16,22 +27,51 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    [self initializeDataSource];
+    [self initializeUserInterface];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark - init methods
+- (void)initializeDataSource{
+    _dataSource = [@[
+                     @[@"黄河"],
+                     @[
+                         @"我的好友",
+                         @"邀请好友"
+                       ],
+                     @[@"退出登录"]
+                     ] mutableCopy];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)initializeUserInterface{
+    [self.view addSubview:self.tableView];
 }
-*/
+
+#pragma mark - UITableViewDelegate,UITableViewDataSource
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 3;
+}
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return _dataSource[section].count;
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kUITableViewCellIdentifier];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kUITableViewCellIdentifier];
+    }
+    cell.textLabel.text = _dataSource[indexPath.section][indexPath.row];
+    return cell;
+}
+
+#pragma mark - Getter methods
+- (UITableView *)tableView{
+    if (!_tableView) {
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height - self.tabBarController.tabBar.bounds.size.height) style:UITableViewStyleGrouped];
+        _tableView.dataSource = self;
+        _tableView.delegate   = self;
+    }
+    return _tableView;
+}
+
 
 @end

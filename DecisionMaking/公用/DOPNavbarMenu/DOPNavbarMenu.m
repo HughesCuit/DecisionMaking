@@ -81,6 +81,8 @@ static CGFloat titleFontSize = 15.0;
         [self addSubview:button];
         [button addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
         UIImageView *icon = [[UIImageView alloc] initWithImage:obj.icon];
+        icon.frame = CGRectMake(0, 0, buttonWidth-65, buttonWidth-65);
+        icon.contentMode = UIViewContentModeScaleToFill;
         icon.center = CGPointMake(buttonWidth/2, buttonHeight/2-15);
         [button addSubview:icon];
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, buttonHeight-35, buttonWidth, 20)];
