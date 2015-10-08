@@ -76,19 +76,58 @@
 }
 
 - (void)didSelectedMenu:(DOPNavbarMenu *)menu atIndex:(NSInteger)index {
-    
+    switch (index) {
+        case 0:
+            [self loadCoins];
+            break;
+        case 1:
+            [self loadDice];
+            break;
+        default:
+            break;
+    }
 }
 
-- (void)loadImageViews{
-    UIImageView *pView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 200, 200)];
+- (void)loadCoins {
+    [self.view.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    UIImageView *pView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 180, 180)];
     pView.image = [UIImage imageNamed:@"1dollar_01"];
-    UIImageView *sView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 200, 200)];
+    UIImageView *sView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 180, 180)];
     sView.image = [UIImage imageNamed:@"1dollar_02"];
-    CMSCoinView *coinView = [[CMSCoinView alloc] initWithPrimaryView:pView andSecondaryView:sView inFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds)-30, CGRectGetWidth(self.view.bounds)-30)];
+    CMSCoinView *coinView = [[CMSCoinView alloc] initWithPrimaryView:pView andSecondaryView:sView inFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds)-80, CGRectGetWidth(self.view.bounds)-80)];
     [coinView setSpinTime:0.1];
     coinView.center = self.view.center;
     [self.view addSubview:coinView];
 }
+
+
+- (void)loadDice{
+    [self.view.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    UIImageView *imgV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0,150 , 150)];
+    NSArray *images = @[[UIImage imageNamed:@"1"],[UIImage imageNamed:@"2"],[UIImage imageNamed:@"3"],[UIImage imageNamed:@"4"],[UIImage imageNamed:@"5"],[UIImage imageNamed:@"6"]];
+    imgV.animationImages = images;
+    imgV.userInteractionEnabled = YES;
+    imgV.tag = 100;
+    imgV.image = imgV.animationImages[arc4random()%6];
+    imgV.contentMode = UIViewContentModeScaleToFill;
+    imgV.center = self.view.center;
+    [self.view addSubview:imgV];
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    UIImageView *imgv = ((UIImageView*)[self.view viewWithTag:100]);
+    imgv.animationDuration = 0.5;
+    [imgv startAnimating];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [imgv stopAnimating];
+        imgv.image = imgv.animationImages[arc4random()%6];
+    });
+}
+
+- (void)loadImageViews{
+    [self loadCoins];
+}
+
 
 #pragma mark - Getter methods
 - (DOPNavbarMenu *)menu {

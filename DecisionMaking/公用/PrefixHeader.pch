@@ -12,5 +12,11 @@
 #define kBlueColor [UIColor colorWithRed:0.161 green:0.647 blue:0.733 alpha:1.000]
 #define kTintColor [UIColor whiteColor]
 #define kBlueColorless [UIColor colorWithRed:0.408 green:0.835 blue:0.882 alpha:1.000]
+#define loggedIn [[NSUserDefaults standardUserDefaults] boolForKey:@"loggedIn"]
+#define setLogin [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"loggedIn"]
+#define setLogout [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"loggedIn"]
+
+#import <Bmob.h>
+#import "LoginViewController.h"
 
 #endif /* PrefixHeader_pch */

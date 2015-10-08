@@ -27,29 +27,37 @@ static NSString *const kUITableViewCellIdentifier = @"cellIdentifier";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+}
+
+- (void)viewWillAppear:(BOOL)animated{
     [self initializeDataSource];
     [self initializeUserInterface];
 }
 
 #pragma mark - init methods
 - (void)initializeDataSource{
-    _dataSource = [@[
-                     @[@"黄河"],
-                     @[
-                         @"我的好友",
-                         @"邀请好友"
-                       ],
-                     @[@"退出登录"]
-                     ] mutableCopy];
+    if (loggedIn) {
+        _dataSource = [@[
+                         @[[[BmobUser getCurrentUser] objectForKey:@"nickName"]?[[BmobUser getCurrentUser] objectForKey:@"nickName"]:[[BmobUser getCurrentUser] objectForKey:@"username"]],
+                         @[
+                             @"我的好友",
+                             @"邀请好友"
+                             ],
+                         @[@"退出登录"]
+                         ] mutableCopy];
+    }else{
+        _dataSource = [@[@[@"未登录"]] mutableCopy];
+    }
 }
 
 - (void)initializeUserInterface{
     [self.view addSubview:self.tableView];
+    [self.tableView reloadData];
 }
 
 #pragma mark - UITableViewDelegate,UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 3;
+    return _dataSource.count;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return _dataSource[section].count;
@@ -63,10 +71,29 @@ static NSString *const kUITableViewCellIdentifier = @"cellIdentifier";
     return cell;
 }
 
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (loggedIn) {
+        if (indexPath.section == 2&&indexPath.row == 0) {
+            setLogout;
+            LoginViewController *loginVC = [[LoginViewController alloc] init];
+            [self presentViewController:loginVC animated:YES completion:^{
+                [BmobUser logout];
+            }];
+        }
+    }else{
+        LoginViewController *loginVC = [[LoginViewController alloc] init];
+        [self presentViewController:loginVC animated:YES completion:^{
+            
+        }];
+    }
+}
+
 #pragma mark - Getter methods
 - (UITableView *)tableView{
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height - self.tabBarController.tabBar.bounds.size.height) style:UITableViewStyleGrouped];
+        _tableView.allowsMultipleSelection = NO;
         _tableView.dataSource = self;
         _tableView.delegate   = self;
     }
