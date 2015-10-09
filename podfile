@@ -1,3 +1,4 @@
 pod 'BmobSDK', '~> 1.5.6'
 pod 'MBProgressHUD', '~> 0.9.1'
 pod "WeiboSDK", :git => "https://github.com/sinaweibosdk/weibo_ios_sdk.git"
+pod 'GraphKit', '~> 1.1.1'

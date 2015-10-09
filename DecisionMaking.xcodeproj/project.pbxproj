@@ -67,6 +67,7 @@
 		247110201BC642F800F1AE46 /* 6@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 247110191BC642F800F1AE46 /* 6@2x.png */; settings = {ASSET_TAGS = (); }; };
 		247110211BC642F800F1AE46 /* bow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2471101A1BC642F800F1AE46 /* bow@2x.png */; settings = {ASSET_TAGS = (); }; };
 		247110241BC653DA00F1AE46 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 247110231BC653DA00F1AE46 /* LoginViewController.m */; settings = {ASSET_TAGS = (); }; };
+		2484BF631BC7A4B80025C401 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2484BF621BC7A4B80025C401 /* DetailViewController.m */; settings = {ASSET_TAGS = (); }; };
 		24A981F21BBA71DA004AF620 /* MXPullDownMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A981F11BBA71DA004AF620 /* MXPullDownMenu.m */; settings = {ASSET_TAGS = (); }; };
 		24A981F71BBA825A004AF620 /* coin-yuan.png in Resources */ = {isa = PBXBuildFile; fileRef = 24A981F61BBA825A004AF620 /* coin-yuan.png */; settings = {ASSET_TAGS = (); }; };
 		24A981FA1BBA9371004AF620 /* 1dollar_01.png in Resources */ = {isa = PBXBuildFile; fileRef = 24A981F81BBA9371004AF620 /* 1dollar_01.png */; settings = {ASSET_TAGS = (); }; };
@@ -149,6 +150,8 @@
 		2471101A1BC642F800F1AE46 /* bow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bow@2x.png"; sourceTree = "<group>"; };
 		247110221BC653DA00F1AE46 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		247110231BC653DA00F1AE46 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		2484BF611BC7A4B80025C401 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		2484BF621BC7A4B80025C401 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		24A981F01BBA71DA004AF620 /* MXPullDownMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MXPullDownMenu.h; sourceTree = "<group>"; };
 		24A981F11BBA71DA004AF620 /* MXPullDownMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MXPullDownMenu.m; sourceTree = "<group>"; };
 		24A981F61BBA825A004AF620 /* coin-yuan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "coin-yuan.png"; sourceTree = "<group>"; };
@@ -273,6 +276,8 @@
 			children = (
 				24610B0C1BB93143001B3B1C /* OnlineDecisionViewController.h */,
 				24610B0D1BB93143001B3B1C /* OnlineDecisionViewController.m */,
+				2484BF611BC7A4B80025C401 /* DetailViewController.h */,
+				2484BF621BC7A4B80025C401 /* DetailViewController.m */,
 			);
 			path = "在线决策";
 			sourceTree = "<group>";
@@ -552,6 +557,7 @@
 				24610B481BB95D2A001B3B1C /* DOPNavbarMenu.m in Sources */,
 				24A981FE1BBA94F9004AF620 /* CMSCoinView.m in Sources */,
 				247110241BC653DA00F1AE46 /* LoginViewController.m in Sources */,
+				2484BF631BC7A4B80025C401 /* DetailViewController.m in Sources */,
 				24633EC91BBB6DEF00351219 /* LHYLockView.m in Sources */,
 				243776BD1BB91EC2008415B0 /* main.m in Sources */,
 				24A981F21BBA71DA004AF620 /* MXPullDownMenu.m in Sources */,

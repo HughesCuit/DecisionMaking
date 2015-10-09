@@ -30,7 +30,7 @@
 }
 
 - (void)initializeUserInterface{
-    self.numberOfItemsInRow = 3;
+    self.numberOfItemsInRow = 2;
     self.view.backgroundColor = kTintColor;
     self.navigationController.navigationBar.tintColor = kTintColor;
     UIBarButtonItem *shareItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"iconfont-exitup-32x32"] style:UIBarButtonItemStylePlain target:self action:@selector(respondsToShareItem)];
@@ -135,7 +135,7 @@
         DOPNavbarMenuItem *coinItem = [DOPNavbarMenuItem ItemWithTitle:@"抛硬币" icon:[UIImage imageNamed:@"iconfont-coinyen"]];
         DOPNavbarMenuItem *diceItem = [DOPNavbarMenuItem ItemWithTitle:@"掷骰子" icon:[UIImage imageNamed:@"iconfont-dice"]];
         DOPNavbarMenuItem *drawingItem = [DOPNavbarMenuItem ItemWithTitle:@"抓阄" icon:[UIImage imageNamed:@"iconfont-drawer"]];
-        _menu = [[DOPNavbarMenu alloc] initWithItems:@[coinItem,diceItem,drawingItem] width:self.view.dop_width maximumNumberInRow:_numberOfItemsInRow];
+        _menu = [[DOPNavbarMenu alloc] initWithItems:@[coinItem,diceItem/*,drawingItem*/] width:self.view.dop_width maximumNumberInRow:_numberOfItemsInRow];
         _menu.backgroundColor = kBlueColorless;
         _menu.separatarColor = kTintColor;
         _menu.delegate = self;

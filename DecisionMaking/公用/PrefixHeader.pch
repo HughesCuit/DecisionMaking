@@ -15,6 +15,7 @@
 #define loggedIn [[NSUserDefaults standardUserDefaults] boolForKey:@"loggedIn"]
 #define setLogin [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"loggedIn"]
 #define setLogout [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"loggedIn"]
+#define defaults [NSUserDefaults standardUserDefaults]
 
 #import <Bmob.h>
 #import "LoginViewController.h"

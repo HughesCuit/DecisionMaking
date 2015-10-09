@@ -4,7 +4,22 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>FrameAccessor.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>GraphKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>MBProgressHUD.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>MKFoundationKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -17,12 +32,27 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>4846AFB88DEBDA7F0D955BFCD68B2498</key>
+		<key>13FB2CD0617E199B15FB8DC061D2AB04</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>96B2763E2725AB370355E817AAEC6085</key>
+		<key>40BF0C7C18C19640048D177C71A47728</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>5BCFD17EC86E1C2575FF908339BB6BE4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>71601D84E199C609BBD83162EF43B132</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EEEF55E9B2A6DC1BF0E2BBBCE5CD4B31</key>
 		<dict>
 			<key>primary</key>
 			<true/>

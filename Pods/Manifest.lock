@@ -1,10 +1,16 @@
 PODS:
   - BmobSDK (1.5.6)
+  - FrameAccessor (1.3.2)
+  - GraphKit (1.1.1):
+    - FrameAccessor (~> 1.3.2)
+    - MKFoundationKit/NSArray (~> 1.2.2)
   - MBProgressHUD (0.9.1)
+  - MKFoundationKit/NSArray (1.2.3)
   - WeiboSDK (3.1.3)
 
 DEPENDENCIES:
   - BmobSDK (~> 1.5.6)
+  - GraphKit (~> 1.1.1)
   - MBProgressHUD (~> 0.9.1)
   - WeiboSDK (from `https://github.com/sinaweibosdk/weibo_ios_sdk.git`)
 
@@ -19,7 +25,10 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   BmobSDK: 258971a8c7baafe9ede2581e779ceec04c747672
+  FrameAccessor: 0f7ba6ce37be9a5d0302a27c731dca70af8d438b
+  GraphKit: e2336bed87d9313020af525dedbca54b62e93533
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
+  MKFoundationKit: 882d74557944790d4d9e172961ed71d6a66804b7
   WeiboSDK: 5f2a707c4569a64f4641f4171acd712016f24342
 
 COCOAPODS: 0.38.2
