@@ -38,7 +38,15 @@
             self.data = @[[object objectForKey:@"yesCount"]?[object objectForKey:@"yesCount"]:@0,[object objectForKey:@"noCount"]?[object objectForKey:@"noCount"]:@0];
             self.labels = @[@"YES",@"NO"];
             self.obj = object;
-            [self initializeUserInterface];
+            if (!self.graphView) {
+                BmobEvent *bmobEvent = [BmobEvent defaultBmobEvent];
+                bmobEvent.delegate = self;
+                [bmobEvent start];
+                [self initializeUserInterface];
+            }else {
+                [self.graphView draw];
+            }
+            
         }];
         
     }
@@ -100,7 +108,12 @@
 #pragma mark
 #pragma mark - BmobEventDelegate
 - (void)bmobEventCanStartListen:(BmobEvent *)event{
-    
+    [event listenRowChange:BmobActionTypeUpdateRow tableName:@"question" objectId:self.questionId];
+}
+
+//接收到得数据
+-(void)bmobEvent:(BmobEvent *)event didReceiveMessage:(NSString *)message{
+    [self initializeDataSource];
 }
 
 #pragma mark 
@@ -110,7 +123,7 @@
 }
 
 - (NSNumber *)valueForBarAtIndex:(NSInteger)index {
-    return [self.data objectAtIndex:index];
+    return @(([[self.data objectAtIndex:index] doubleValue] / ([self.data[0] doubleValue]+[self.data[1] doubleValue]))*100);
 }
 
 - (UIColor *)colorForBarAtIndex:(NSInteger)index {
