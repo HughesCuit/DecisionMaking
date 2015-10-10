@@ -39,10 +39,7 @@ static NSString *const kUITableViewCellIdentifier = @"cellIdentifier";
     if (loggedIn) {
         _dataSource = [@[
                          @[[[BmobUser getCurrentUser] objectForKey:@"nickName"]?[[BmobUser getCurrentUser] objectForKey:@"nickName"]:[[BmobUser getCurrentUser] objectForKey:@"username"]],
-                         @[
-                             @"我的好友",
-                             @"邀请好友"
-                             ],
+                         
                          @[@"退出登录"]
                          ] mutableCopy];
     }else{

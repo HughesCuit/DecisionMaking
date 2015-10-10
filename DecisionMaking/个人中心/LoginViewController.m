@@ -123,4 +123,10 @@
     }];
 }
 
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    UITextField *accTF = (UITextField*)[self.view viewWithTag:100];
+    UITextField *pwdTF = (UITextField*)[self.view viewWithTag:101];
+    [accTF resignFirstResponder];
+    [pwdTF resignFirstResponder];
+}
 @end

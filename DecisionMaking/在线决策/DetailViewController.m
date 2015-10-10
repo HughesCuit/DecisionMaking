@@ -44,7 +44,16 @@
                 [bmobEvent start];
                 [self initializeUserInterface];
             }else {
-                [self.graphView draw];
+                double sum = [self.data[0] doubleValue]+[self.data[1] doubleValue];
+                if (sum==0) {
+                    sum=1;
+                }
+                ((GKBar*)self.graphView.bars[0]).animated = YES;
+                ((GKBar*)self.graphView.bars[0]).percentage = ([self.data[0] doubleValue] / sum)*100;
+                ((GKBar*)self.graphView.bars[1]).animated = YES;
+                ((GKBar*)self.graphView.bars[1]).percentage = ([self.data[1] doubleValue] / sum)*100;
+                ((UILabel*)self.graphView.labels[0]).text = [NSString stringWithFormat:@"%@:%@",self.labels[0],self.data[0]];
+                ((UILabel*)self.graphView.labels[1]).text = [NSString stringWithFormat:@"%@:%@",self.labels[1],self.data[1]];
             }
             
         }];
@@ -52,18 +61,50 @@
     }
 }
 - (void)initializeUserInterface{
-    self.graphView = [[GKBarGraph alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 400)];
-    self.graphView.barHeight = 350;
-    self.graphView.barWidth = 80;
+    
+    self.graphView = [[GKBarGraph alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds)/3)];
+    self.graphView.center = self.view.center;
+    self.graphView.barHeight = CGRectGetHeight(self.view.bounds)/3;
+    self.graphView.barWidth = CGRectGetWidth(self.view.bounds)*80/375;
     self.graphView.dataSource = self;
     [self.view addSubview:self.graphView];
     [self.graphView draw];
     
+    
+    
+    
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), CGRectGetMinY(self.graphView.frame)/2)];
+    titleLabel.backgroundColor = kBlueColorless;
+    titleLabel.numberOfLines = 0;
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+    titleLabel.text = [self.obj objectForKey:@"title"];
+    titleLabel.textColor = [UIColor grayColor];
+    [self.view addSubview:titleLabel];
+    
+    UILabel *yesLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(titleLabel.frame), CGRectGetWidth(self.view.bounds)/2, CGRectGetHeight(titleLabel.frame)/2)];
+    yesLabel.backgroundColor = [UIColor colorWithRed:0.122 green:0.553 blue:0.831 alpha:1.000];
+    yesLabel.numberOfLines = 0;
+    yesLabel.textAlignment = NSTextAlignmentCenter;
+    yesLabel.text = [self.obj objectForKey:@"yesContent"];
+    [self.view addSubview:yesLabel];
+    
+    UILabel *noLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(yesLabel.frame), CGRectGetMaxY(titleLabel.frame), CGRectGetWidth(self.view.bounds)/2, CGRectGetHeight(titleLabel.frame)/2)];
+    noLabel.backgroundColor = [UIColor colorWithRed:0.980 green:0.000 blue:0.478 alpha:1.000];
+    noLabel.numberOfLines = 0;
+    noLabel.textAlignment = NSTextAlignmentCenter;
+    noLabel.text = [self.obj objectForKey:@"noContent"];
+    [self.view addSubview:noLabel];
+    
+    
+    
+    
+    CGFloat buttonHeight = CGRectGetMaxY(self.view.bounds)-CGRectGetMaxY(self.graphView.frame) - self.tabBarController.tabBar.frame.size.height;
+    
     UIButton *yesButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     
-    yesButton.frame = CGRectMake(0, 0, 100, 100);
+    yesButton.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.bounds)*0.3, buttonHeight);
     yesButton.titleLabel.numberOfLines = 0;
-    yesButton.center = CGPointMake(self.view.center.x-70, CGRectGetMaxY(self.graphView.frame)+80);
+    yesButton.center = CGPointMake(self.view.center.x-70, CGRectGetMaxY(self.graphView.frame)+CGRectGetHeight(self.graphView.bounds)/2);
     yesButton.backgroundColor = [UIColor colorWithRed:0.173 green:0.631 blue:0.855 alpha:1.000];
     [yesButton setTitle:[self.obj objectForKey:@"yesContent"] forState:UIControlStateNormal];
     yesButton.layer.cornerRadius = 15;
@@ -72,9 +113,9 @@
     [yesButton addTarget:self action:@selector(respondsToButton:) forControlEvents:UIControlEventTouchUpInside];
     
     UIButton *noButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    noButton.frame = CGRectMake(0, 0, 100, 100);
+    noButton.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.bounds)*0.3, buttonHeight);
     noButton.titleLabel.numberOfLines = 0;
-    noButton.center = CGPointMake(self.view.center.x+70, CGRectGetMaxY(self.graphView.frame)+80);
+    noButton.center = CGPointMake(self.view.center.x+70, CGRectGetMaxY(self.graphView.frame)+CGRectGetHeight(self.graphView.bounds)/2);
     noButton.backgroundColor = [UIColor colorWithRed:0.984 green:0.039 blue:0.553 alpha:1.000];
     [noButton setTitle:[self.obj objectForKey:@"noContent"] forState:UIControlStateNormal];
     noButton.layer.cornerRadius = 15;
@@ -123,7 +164,11 @@
 }
 
 - (NSNumber *)valueForBarAtIndex:(NSInteger)index {
-    return @(([[self.data objectAtIndex:index] doubleValue] / ([self.data[0] doubleValue]+[self.data[1] doubleValue]))*100);
+    double sum = [self.data[0] doubleValue]+[self.data[1] doubleValue];
+    if (sum==0) {
+        sum=1;
+    }
+    return @(([[self.data objectAtIndex:index] doubleValue] / sum)*100);
 }
 
 - (UIColor *)colorForBarAtIndex:(NSInteger)index {

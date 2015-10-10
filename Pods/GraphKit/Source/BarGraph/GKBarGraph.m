@@ -95,10 +95,8 @@ static CGFloat kDefaultAnimationDuration = 2.0;
     
     if ([self _hasBars]) [self _removeBars];
     if ([self _hasLabels]) [self _removeLabels];
-    if (!self.bars) {
-       [self _constructBars];
-    }
-//    [self _constructBars];
+
+    [self _constructBars];
     [self _constructLabels];
     
     [self _positionBars];

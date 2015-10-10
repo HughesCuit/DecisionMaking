@@ -11,6 +11,7 @@
 #import "CMSCoinView.h"
 
 
+
 @interface LocalDecisionViewController ()<UITextViewDelegate,DOPNavbarMenuDelegate>
 
 @property (nonatomic,assign) NSInteger numberOfItemsInRow;
@@ -45,8 +46,12 @@
 #pragma mark - Responds methods
 -(void)respondsToShareItem{
     UIAlertController *shareController = [UIAlertController alertControllerWithTitle:@"分享" message:@"分享到" preferredStyle:UIAlertControllerStyleActionSheet];
-    UIAlertAction *weChatAction        = [UIAlertAction actionWithTitle:@"微信" style:UIAlertActionStyleDefault handler:nil];
-    UIAlertAction *weiboAction         = [UIAlertAction actionWithTitle:@"微博" style:UIAlertActionStyleDefault handler:nil];
+    UIAlertAction *weChatAction        = [UIAlertAction actionWithTitle:@"微信" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    UIAlertAction *weiboAction         = [UIAlertAction actionWithTitle:@"微博" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
     UIAlertAction *qqAction            = [UIAlertAction actionWithTitle:@"QQ" style:UIAlertActionStyleDefault handler:nil];
     UIAlertAction *cancelAction        = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
     
